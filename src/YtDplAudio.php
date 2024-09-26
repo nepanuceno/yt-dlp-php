@@ -1,32 +1,31 @@
 <?php
 namespace YtDpl;
 
-class YtDplAudio
+use YtDpl\Interfaces\YtDplAudioInterface;
+
+class YtDplAudio extends YtDpl implements YtDplAudioInterface
 {
-    public $playList;
     public $audioFormat;
-    public $url;
 
     public function __construct(){}
-
-    public function setPlayList($playList)
-    {
-        $this->playList = $playList;
-    }
 
     public function setAudioFormat($audioFormat)
     {
         $this->audioFormat = $audioFormat;
     }
 
-    public function setUrl($url)
+    public function getAudioFormat()
     {
-        $this->url = $url;
+        return $this->audioFormat;
     }
-
+	
     public function download()
     {
-        $cmd = "yt-dlp --yes-playlist -x --audio-format mp3 https://www.youtube.com/watch?v=uIh8JmGJYEk";
-        system($cmd);
+        system($this->buildCommand());
     }
+
+    public function buildCommand()
+    {
+        return "./yt-dlp ".$this->getPlaylist()." -x --audio-format " . $this->getAudioFormat() . " " . $this->getPath() . " " . $this->getUrl();
+    }   
 }
