@@ -1,0 +1,19 @@
+{
+    "name": "nepanuceno/yt-dpl-php",
+    "description": "YT-DPL for PHP",
+    "type": "metapackage",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "YtDpl\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paulo Roberto Torres",
+            "email": "paulo.torres.apps@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
