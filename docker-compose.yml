@@ -3,8 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: application
-    container_name: application
+    user: 1000:1000
+    image: yt-dlp-application
+    container_name: yt-dlp-application
     tty: true
     ports:
       - "9000:9000"

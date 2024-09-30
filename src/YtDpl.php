@@ -10,12 +10,15 @@
     public $writeComments;
     public $writeThumbnail;
     public $writeLink;
+    public $nameFile;
 
     public function __construct(){}
 
     public function setUrl( $url): void {$this->url = $url;}
 
 	public function setPath( $path): void {$this->path = $path;}
+
+    public function setNameFile($nameFile):void {$this->nameFile = $nameFile;}
 
 	public function setPlaylist( $playlist): void {$this->playlist = $playlist;}
 
@@ -34,6 +37,14 @@
     {
         if ($this->path) {
             return "-P ".$this->path;
+        }
+        return null;
+    }
+
+    public function getNameFile():string
+    {
+        if ($this->nameFile) {
+            return " --no-restrict-filenames -o \"TESTE.mp3\" ".$this->path;
         }
         return null;
     }
