@@ -8,4 +8,6 @@ interface YtDplAudioInterface
     public function setAudioFormat($audioFormat);
     public function getAudioFormat();
     public function buildCommand();
+    public function extractFile();
+    public function extractInfoFile();
 }
