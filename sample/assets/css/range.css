@@ -1,0 +1,44 @@
+.range-selector-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    position: relative;
+}
+.range-wrapper {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.range-track {
+    position: absolute;
+    height: 100%;
+    background-color: #4CAF50;
+    z-index: 1;
+}
+.range-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 2;
+}
+.range-handle:hover {
+    background-color: #1976D2;
+}
+.range-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.range-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
