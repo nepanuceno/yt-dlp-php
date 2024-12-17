@@ -10,6 +10,7 @@
     <!-- wRunner CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/range.css">
+    <link rel="stylesheet" href="assets/css/spinner.css">
 </head>
 <body>
     <div class="container">
@@ -26,12 +27,12 @@
                 <div id="errorMessage" class="error-message"></div>
             </div>
             <div class="range-selector-container">
-                <div class="range-label" id="rangeLabel">Selecione o Intervalo</div>
+                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar</div>
                 <div 
                     class="range-wrapper" 
                     id="rangeWrapper" 
                     data-min="0" 
-                    data-max="1000" 
+                    data-max="0" 
                     data-start-min=""
                     data-start-max=""
                 >
@@ -43,6 +44,9 @@
                     <span id="minValueDisplay">0</span>
                     <span id="maxValueDisplay">1000</span>
                 </div>
+            </div>
+            <div class="spinner-container">
+                <div class="spinner"></div>
             </div>
             <button type="submit" class="btn">Enviar URL</button>
         </form>

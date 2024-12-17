@@ -14,6 +14,7 @@ form.addEventListener('submit', function(event) {
     // Limpa mensagens anteriores
     errorMessageElement.textContent = '';
     urlInput.classList.remove('error');
+    document.querySelector('.spinner-container').style.display = 'flex';
     
     // Regex para validação de URL
     const urlRegex = new RegExp(
@@ -49,8 +50,12 @@ form.addEventListener('submit', function(event) {
     .then(data => {
         let maxTime = Math.floor(data.duracao);
         let valueMaxRange = document.querySelector('.range-wrapper');
+        document.querySelector('.range-selector-container').style.display = 'block';
+        
         valueMaxRange.setAttribute('data-max', maxTime);
-
+        const rangeWrapper = document.getElementById('rangeWrapper');
+        const rangeSelector = new DynamicRangeSelector(rangeWrapper);
+        document.querySelector('.spinner-container').style.display = 'none';
         console.log('Success:', valueMaxRange, maxTime); // Handle the response data
     })
     .catch((error) => {
