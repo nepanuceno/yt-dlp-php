@@ -47,8 +47,11 @@ form.addEventListener('submit', function(event) {
     })
     .then(response => response.json()) // Parse the JSON response
     .then(data => {
-        let maxTime = Math.floor(data);
-        console.log('Success:', maxTime); // Handle the response data
+        let maxTime = Math.floor(data.duracao);
+        let valueMaxRange = document.querySelector('.range-wrapper');
+        valueMaxRange.setAttribute('data-max', maxTime);
+
+        console.log('Success:', valueMaxRange, maxTime); // Handle the response data
     })
     .catch((error) => {
     console.error('Error:', error); // Handle any errors

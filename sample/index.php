@@ -31,7 +31,7 @@
                     class="range-wrapper" 
                     id="rangeWrapper" 
                     data-min="0" 
-                    data-max="100" 
+                    data-max="1000" 
                     data-start-min=""
                     data-start-max=""
                 >
@@ -41,7 +41,7 @@
                 </div>
                 <div class="range-values">
                     <span id="minValueDisplay">0</span>
-                    <span id="maxValueDisplay">100</span>
+                    <span id="maxValueDisplay">1000</span>
                 </div>
             </div>
             <button type="submit" class="btn">Enviar URL</button>
