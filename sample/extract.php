@@ -1,22 +1,26 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once "../vendor/autoload.php";
 
 use YtDpl\YtDplAudio;
 
-header('Content-Type: application/json; charset=utf-8');
-$data = json_decode(file_get_contents("php://input"), true);
+header("Content-Type: application/json; charset=utf-8");
+$data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 $url = $data["urlInput"];
 
 $objYtDlpAudio = new YtDplAudio();
-$objYtDlpAudio->setPath('/var/www/file_temp');
-$objYtDlpAudio->setUrl($url);
-$objYtDlpAudio->setPlaylist(true);
-$objYtDlpAudio->setAudioFormat('mp3');
-$objYtDlpAudio->setNameFile('teste');
+$objYtDlpAudio->setPath(path: "/var/www/file_temp");
+$objYtDlpAudio->setUrl(url: $url);
+$objYtDlpAudio->setPlaylist(playlist: true);
+$objYtDlpAudio->setAudioFormat(audioFormat: "mp3");
+$objYtDlpAudio->setNameFile(nameFile: "teste");
 $objYtDlpAudio->extractFile();
-$timeFile = $objYtDlpAudio->extractInfoFile();
-// $objYtDlpAudio->download();
+$daration = $objYtDlpAudio->extractInfoFile();
 
-return json_encode(array('time'=>$timeFile));
+// $objYtDlpAudio->download();
+echo json_encode(array(
+    "status" => true,
+    "duracao" => $daration,
+));
+
 ?>

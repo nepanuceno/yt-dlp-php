@@ -22,8 +22,17 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
     public function generateFile()
     {
         $comando = $this->buildCommand();
-        // exec($comando);
-        passthru($comando); 
+        try {
+            exec($comando);
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return json_encode([
+                'status'=>false,
+                'messagem' => $th->getMessage()
+            ]);
+        }
+        // passthru($comando); 
         // print_r($resp);
         // die();
     }
@@ -33,9 +42,8 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
     }
 
     public function extractInfoFile(): bool|string {
-
         $path = dirname(__DIR__) . '/file_temp/TESTE.mp3';
-        return exec("ffmpeg -i " . escapeshellarg($path) . " 2>&1 | grep 'Duration' | cut -d ' ' -f 4 | sed s/,//");
+        return exec('ffprobe -i '.escapeshellarg($path).' -show_entries format=duration -v quiet -of csv="p=0"');
     }
 	
     public function download()
