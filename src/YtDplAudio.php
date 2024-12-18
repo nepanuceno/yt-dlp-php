@@ -6,6 +6,7 @@ use YtDpl\Interfaces\YtDplAudioInterface;
 class YtDplAudio extends YtDpl implements YtDplAudioInterface
 {
     public $audioFormat;
+    const NAME_FILE_TEMP = 'TESTE'; 
 
     public function __construct(){}
 
@@ -19,59 +20,55 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
         return $this->audioFormat;
     }
 
-    public function generateFile()
+    public function generateFile(): bool|string
     {
         $comando = $this->buildCommand();
         try {
             exec($comando);
+            return json_encode([
+                'status'=>true,
+                'messagem' => 'Ádio Extraído'
+            ]);
         } catch (\Throwable $th) {
-            //throw $th;
-
             return json_encode([
                 'status'=>false,
                 'messagem' => $th->getMessage()
             ]);
         }
-        // passthru($comando); 
-        // print_r($resp);
-        // die();
     }
 
-    public function cutFile($minValueDisplay, $maxValueDisplay): bool|string{
+    public function cutFile($minValueDisplay, $maxValueDisplay, $fileName): bool|string{
         try {
-            //code...
-            $path = dirname(__DIR__) . '/file_temp/TESTE.mp3';
-            $pathCutFile = dirname(__DIR__) . '/file_temp/saida.mp3';
+            $path = $this->getPath().'/'.self::NAME_FILE_TEMP.'.'.$this->getAudioFormat();
+            $pathCutFile = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();
+
             exec('ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile);
             return json_encode([
                 'status'=> true,
                 'message' => 'ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile
             ]);
         } catch (\Throwable $th) {
-            //throw $th;
             return json_encode([
                 'status'=>false,
                 'message' => $th->getMessage()
             ]);
         }
-
-        
     }
 
-    public function extractFile() {
-        $this->generateFile();
+    public function extractFile(): bool|string {
+        return $this->generateFile();
     }
 
     public function extractInfoFile(): bool|string {
-        $path = dirname(__DIR__) . '/file_temp/TESTE.mp3';
+        $path = $this->getPath().'/'.self::NAME_FILE_TEMP.'.'.$this->getAudioFormat();
+
         return exec('ffprobe -i '.escapeshellarg($path).' -show_entries format=duration -v quiet -of csv="p=0"');
     }
 	
-    public function download()
+    public function download($fileName)
     {
-        
         set_time_limit(0);
-        $file = '/var/www/file_temp/saida.mp3';
+        $file = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();
         
         if (file_exists($file)) {
             header('Content-Description: File Transfer');
@@ -82,12 +79,15 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
             header('Pragma: public');
             header('Content-Length: ' . filesize($file));
             readfile($file);
+
+            unlink($this->getPath().'/'.self::NAME_FILE_TEMP.'.'.$this->getAudioFormat());
+            unlink($file);
             exit;
         }
     }
 
     public function buildCommand()
     {
-        return "yt-dlp ".$this->getPlaylist()." -x --audio-format " . $this->getAudioFormat() . " --no-restrict-filenames -o \"TESTE.mp3\" " . $this->getPath() . " " . $this->getUrl();
+        return "yt-dlp ".$this->getPlaylist()." -x --audio-format " . $this->getAudioFormat() . " --no-restrict-filenames -o \"TESTE.".$this->getAudioFormat()."\" -P " . $this->getPath() . " " . $this->getUrl();
     }   
 }

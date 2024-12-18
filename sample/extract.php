@@ -7,15 +7,20 @@ use YtDpl\YtDplAudio;
 header("Content-Type: application/json; charset=utf-8");
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 $url = $data["urlInput"] ?? null;
+$download = $data['download'] ?? null;
 
 $objYtDlpAudio = new YtDplAudio();
-if($url) {
-    $objYtDlpAudio->setPath(path: "/var/www/file_temp");
-    $objYtDlpAudio->setUrl(url: $url);
-    $objYtDlpAudio->setPlaylist(playlist: true);
-    $objYtDlpAudio->setAudioFormat(audioFormat: "mp3");
-    $objYtDlpAudio->setNameFile(nameFile: "teste");
-    $objYtDlpAudio->extractFile();
+$objYtDlpAudio->setPath(path: dirname(__DIR__) . "/file_temp");
+$objYtDlpAudio->setUrl(url: $url);
+$objYtDlpAudio->setPlaylist(playlist: true);
+$objYtDlpAudio->setAudioFormat(audioFormat: "mp3");
+
+$fileName = $objYtDlpAudio->getMideaName($url);
+
+$objYtDlpAudio->setNameFile(nameFile: $fileName);
+
+if(!$download) {
+    $objYtDlpAudio->extractFile();    
     $daration = $objYtDlpAudio->extractInfoFile();
     echo json_encode(array(
         "status" => true,
@@ -23,15 +28,10 @@ if($url) {
     ));
 } else {
     $minValueDisplay = $data["minValueDisplay"];
-    $maxValueDisplay = $data["maxValueDisplay"];
+    $maxValueDisplay = $data["maxValueDisplay"];    
+    $objResponse = $objYtDlpAudio->cutFile($minValueDisplay, $maxValueDisplay, $fileName);
+    $objYtDlpAudio->download($fileName);
 
-    $objResponse = $objYtDlpAudio->cutFile($minValueDisplay, $maxValueDisplay);
-    $objYtDlpAudio->download();
-
-    echo $objResponse;
+    // echo $objResponse;
 }
-
-
-
-
 ?>

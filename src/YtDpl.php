@@ -11,6 +11,7 @@
     public $writeThumbnail;
     public $writeLink;
     public $nameFile;
+    public $nameMidea;
 
     public function __construct(){}
 
@@ -33,10 +34,10 @@
 
     public function getUrl():string {return $this->url;}
 
-	public function getPath():string
+	public function getPath():?string
     {
         if ($this->path) {
-            return "-P ".$this->path;
+            return $this->path;
         }
         return null;
     }
@@ -84,6 +85,12 @@
         if ($this->writeLink) {
             return "--write-link";
         }
-        return null;}
+        return null;
+    }
 
+
+    public function getMideaName($url): bool|string
+    {
+        return $this->nameMidea = exec('yt-dlp --get-filename -o "%(title)s" '.$url);
+    }
  }
