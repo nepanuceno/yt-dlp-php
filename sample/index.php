@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -27,7 +25,7 @@
                 <div id="errorMessage" class="error-message"></div>
             </div>
             <div class="range-selector-container">
-                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar</div>
+                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar o áudio</div>
                 <div 
                     class="range-wrapper" 
                     id="rangeWrapper" 
@@ -36,9 +34,9 @@
                     data-start-min=""
                     data-start-max=""
                 >
-                    <div class="range-track" id="rangeTrack"></div>
-                    <div class="range-handle" id="minHandle"></div>
-                    <div class="range-handle" id="maxHandle"></div>
+                <div class="range-track" id="rangeTrack"></div>
+                <div class="range-handle" id="minHandle"></div>
+                <div class="range-handle" id="maxHandle"></div>
                 </div>
                 <div class="range-values">
                     <span id="minValueDisplay">0</span>
@@ -48,10 +46,12 @@
             <div class="spinner-container">
                 <div class="spinner"></div>
             </div>
-            <button type="submit" class="btn">Enviar URL</button>
+            <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
         </form>
+        <button type="button" class="btn" id="btnSendRangeTime">Download</button>
     </div>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/range.js"></script>
+    <script src="assets/js/sendTimeRange.js"></script>
 </body>
 </html>

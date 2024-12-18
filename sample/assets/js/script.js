@@ -40,11 +40,11 @@ form.addEventListener('submit', function(event) {
 
     // Make the POST request
     fetch(url, {
-    method: 'POST', // Specify the request method
-    headers: {
-        'Content-Type': 'application/json' // Set the content type to JSON
-    },
-    body: JSON.stringify(data) // Convert the data to a JSON string
+        method: 'POST', // Specify the request method
+        headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+        },
+        body: JSON.stringify(data) // Convert the data to a JSON string
     })
     .then(response => response.json()) // Parse the JSON response
     .then(data => {
@@ -55,10 +55,13 @@ form.addEventListener('submit', function(event) {
         valueMaxRange.setAttribute('data-max', maxTime);
         const rangeWrapper = document.getElementById('rangeWrapper');
         const rangeSelector = new DynamicRangeSelector(rangeWrapper);
+        
         document.querySelector('.spinner-container').style.display = 'none';
+        document.querySelector('#btnSendUrl').style.display = 'none';
+        document.querySelector('#btnSendRangeTime').style.display = 'block';
         console.log('Success:', valueMaxRange, maxTime); // Handle the response data
     })
     .catch((error) => {
-    console.error('Error:', error); // Handle any errors
-    }); 
+        console.error('Error:', error); // Handle any errors
+    });
 });

@@ -37,6 +37,27 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
         // die();
     }
 
+    public function cutFile($minValueDisplay, $maxValueDisplay): bool|string{
+        try {
+            //code...
+            $path = dirname(__DIR__) . '/file_temp/TESTE.mp3';
+            $pathCutFile = dirname(__DIR__) . '/file_temp/saida.mp3';
+            exec('ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile);
+            return json_encode([
+                'status'=> true,
+                'message' => 'ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return json_encode([
+                'status'=>false,
+                'message' => $th->getMessage()
+            ]);
+        }
+
+        
+    }
+
     public function extractFile() {
         $this->generateFile();
     }
@@ -49,20 +70,20 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
     public function download()
     {
         
-        // set_time_limit(0);
-        // $file = '/var/www/file_temp/TESTE.mp3';
+        set_time_limit(0);
+        $file = '/var/www/file_temp/saida.mp3';
         
-        // if (file_exists($file)) {
-        //     header('Content-Description: File Transfer');
-        //     header('Content-Type: application/octet-stream');
-        //     header('Content-Disposition: attachment; filename="'.basename($file).'"');
-        //     header('Expires: 0');
-        //     header('Cache-Control: must-revalidate');
-        //     header('Pragma: public');
-        //     header('Content-Length: ' . filesize($file));
-        //     readfile($file);
-        //     exit;
-        // }
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($file).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        }
     }
 
     public function buildCommand()

@@ -10,4 +10,5 @@ interface YtDplAudioInterface
     public function buildCommand();
     public function extractFile();
     public function extractInfoFile();
+    public function cutFile($minValueDisplay, $maxValueDisplay);
 }
