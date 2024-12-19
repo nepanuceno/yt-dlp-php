@@ -171,6 +171,12 @@
                         <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
                     </form>
                     <button type="button" class="btn" id="btnSendRangeTime">Download</button>
+                    <div class="supported-sites" id="supported-sites-list">
+                        <h2>Plataformas Suportados</h2>
+                        <div class="sites-category">
+                            <ul id="listaResposta"></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
