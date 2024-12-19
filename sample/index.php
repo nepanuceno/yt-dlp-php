@@ -43,29 +43,72 @@
         <div class="sites-category">
             <h3>Redes Sociais</h3>
             <ul class="sites-list">
-                <li>
-                    <span class="site-name">Instagram</span>
-                </li>
-                <li>
-                    <span class="site-name">Facebook</span>
-                </li>
-                <li>
-                    <span class="site-name">TikTok</span>
-                </li>
+            <li>
+                <span class="site-name">Instagram</span>
+                <span class="site-desc">Posts, reels e stories</span>
+            </li>
+            <li>
+                <span class="site-name">Facebook</span>
+                <span class="site-desc">Vídeos públicos e watch</span>
+            </li>
+            <li>
+                <span class="site-name">Twitter/X</span>
+                <span class="site-desc">Tweets com mídia</span>
+            </li>
+            <li>
+                <span class="site-name">TikTok</span>
+                <span class="site-desc">Vídeos e áudios</span>
+            </li>
+            <li>
+                <span class="site-name">LinkedIn</span>
+                <span class="site-desc">Posts com mídia</span>
+            </li>
+            <li>
+                <span class="site-name">Reddit</span>
+                <span class="site-desc">Posts e subreddits</span>
+            </li>
             </ul>
         </div>
 
         <div class="sites-category">
-            <h3>Áudio</h3>
+            <h3>Plataformas de Áudio</h3>
             <ul class="sites-list">
                 <li>
                     <span class="site-name">SoundCloud</span>
+                    <span class="site-desc">Faixas e playlists</span>
                 </li>
                 <li>
                     <span class="site-name">Spotify</span>
+                    <span class="site-desc">Faixas públicas</span>
                 </li>
                 <li>
                     <span class="site-name">Bandcamp</span>
+                    <span class="site-desc">Álbuns e faixas</span>
+                </li>
+                <li>
+                    <span class="site-name">Mixcloud</span>
+                    <span class="site-desc">Sets e shows</span>
+                </li>
+            </ul>
+        </div>
+        <div class="sites-category">
+            <h3>Streaming e Educação</h3>
+            <ul class="sites-list">
+                <li>
+                    <span class="site-name">Twitch</span>
+                    <span class="site-desc">Streams e clipes</span>
+                </li>
+                <li>
+                    <span class="site-name">Udemy</span>
+                    <span class="site-desc">Aulas e cursos</span>
+                </li>
+                <li>
+                    <span class="site-name">ESPN</span>
+                    <span class="site-desc">Clipes esportivos</span>
+                </li>
+                <li>
+                    <span class="site-name">PBS</span>
+                    <span class="site-desc">Documentários e shows</span>
                 </li>
             </ul>
         </div>
@@ -120,6 +163,7 @@
             </div>
             <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
         </form>
+        <button type="button" class="btn" id="btnSendRangeTime">Download</button>
     </div>
 </div>
     <script src="assets/js/script.js"></script>
