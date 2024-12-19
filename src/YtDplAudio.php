@@ -40,11 +40,19 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
         try {
             $path = $this->getPath().'/'.$this->getFileName().'.'.$this->getAudioFormat();
             $pathCutFile = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();
-
-            exec('ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile);
+                        
+            $comando = sprintf(
+                'ffmpeg -i %s -ss %s -t %s -c copy %s',
+                escapeshellarg($path),
+                $minValueDisplay,
+                $maxValueDisplay,
+                $pathCutFile
+            );
+            exec($comando);            
+            
             return json_encode([
                 'status'=> true,
-                'message' => 'ffmpeg -i ' . escapeshellarg($path) . ' -ss '.$minValueDisplay.' -t '.$maxValueDisplay.' -c copy '. $pathCutFile
+                'message' => $comando
             ]);
         } catch (\Throwable $th) {
             return json_encode([

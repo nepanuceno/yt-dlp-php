@@ -96,7 +96,11 @@
 
     public function getMideaName($url): bool|string
     {
-        return $this->nameMidea = exec('yt-dlp --get-filename -o "%(title)s" '.$url);
+        $pathCutFile = $this->nameMidea = exec('yt-dlp --get-filename -o "%(title)s" '.$url);
+        $pathCutFile = preg_replace('/[^a-z0-9._ \/]/', '', strtolower($pathCutFile));
+        $pathCutFile = str_replace(' ', '-',  $pathCutFile);
+
+        return  $pathCutFile;
     }
 
     public function setAudioFormat($audioFormat)

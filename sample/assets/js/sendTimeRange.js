@@ -81,6 +81,7 @@ function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
             link.click();
             document.body.removeChild(link);
         }
+        location.reload(true);
     })
     .catch((error) => {
         console.error('Error:', error); // Handle any errors
