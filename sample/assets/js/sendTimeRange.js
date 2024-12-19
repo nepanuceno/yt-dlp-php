@@ -1,5 +1,14 @@
 const btnSendTimeRange = document.querySelector('#btnSendRangeTime');
 
+function showLoading() {
+    document.querySelector('.loading-overlay').classList.add('loading');
+}
+
+// Para esconder o loading
+function hideLoading() {
+    document.querySelector('.loading-overlay').classList.remove('loading');
+}
+
 btnSendTimeRange.addEventListener('click', function(e){
     e.preventDefault();
 
@@ -40,7 +49,7 @@ function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea, audioForm
     let url = 'cutter.php';
     let filename;
 
-    document.querySelector('.spinner-container').style.display = 'flex';
+    showLoading();
     document.querySelector('#btnSendRangeTime').classList.add('disabled');
     
     const data = {

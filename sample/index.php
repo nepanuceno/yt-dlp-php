@@ -52,12 +52,13 @@
                 <label for="audioFormat">Selecione o formato do áudio:</label>
                 <select id="audioFormat" name="audioFormat" required>
                     <option value="">Selecione um formato</option>
-                    <option value="mp3">MP3 - Formato mais comum e amplamente suportado</option>
-                    <option value="wav">WAV - Alta qualidade sem compressão</option>
-                    <option value="aac">AAC - Qualidade superior ao MP3 com menor tamanho</option>
-                    <option value="ogg">OGG - Formato livre e de código aberto</option>
-                    <option value="m4a">M4A - Formato da Apple com boa qualidade</option>
-                    <option value="flac">FLAC - Compressão sem perdas</option>
+                    <option value="mp3">MP3 - Formato mais comum</option>
+                    <option value="m4a">M4A - Boa qualidade e tamanho reduzido</option>
+                    <option value="wav">WAV - Áudio sem compressão</option>
+                    <option value="opus">OPUS - Alta qualidade em baixo bitrate</option>
+                    <option value="vorbis">OGG/Vorbis - Formato livre</option>
+                    <option value="flac">FLAC - Áudio sem perdas</option>
+                    <option value="aac">AAC - Qualidade superior</option>
                 </select>
             </div>
 

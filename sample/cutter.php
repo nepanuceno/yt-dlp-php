@@ -19,8 +19,6 @@ $tempFileName = md5($fileName);
 
 $objYtDlpAudio->setFileName(fileName: $tempFileName);
 
-
-
 $minValueDisplay = $data["minValueDisplay"];
 $maxValueDisplay = $data["maxValueDisplay"];
 
