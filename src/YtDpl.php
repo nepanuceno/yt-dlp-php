@@ -12,14 +12,14 @@
     public $writeLink;
     public $nameFile;
     public $nameMidea;
+    public $audioFormat;
+    public $fileName;
 
     public function __construct(){}
 
     public function setUrl( $url): void {$this->url = $url;}
 
 	public function setPath( $path): void {$this->path = $path;}
-
-    public function setNameFile($nameFile):void {$this->nameFile = $nameFile;}
 
 	public function setPlaylist( $playlist): void {$this->playlist = $playlist;}
 
@@ -42,11 +42,16 @@
         return null;
     }
 
-    public function getNameFile():string
+    /**
+     * Summary of getNameFile
+     * @return string|null
+     */
+    public function getNameFile():?string
     {
-        if ($this->nameFile) {
-            return " --no-restrict-filenames -o \"TESTE.mp3\" ".$this->path;
+        if ($this->fileName) {
+           return $this->fileName;
         }
+        
         return null;
     }
 
@@ -92,5 +97,25 @@
     public function getMideaName($url): bool|string
     {
         return $this->nameMidea = exec('yt-dlp --get-filename -o "%(title)s" '.$url);
+    }
+
+    public function setAudioFormat($audioFormat)
+    {
+        $this->audioFormat = $audioFormat;
+    }
+
+    public function getAudioFormat()
+    {
+        return $this->audioFormat;
+    }
+
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
     }
  }

@@ -35,8 +35,8 @@ function getFileName(response)
 
 function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
 {
-    let url = 'extract.php';
-    let filename
+    let url = 'cutter.php';
+    let filename;
 
     const data = {
         'minValueDisplay':minValueDisplay,

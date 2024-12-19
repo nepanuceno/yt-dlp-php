@@ -7,7 +7,6 @@ use YtDpl\YtDplAudio;
 header("Content-Type: application/json; charset=utf-8");
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 $url = $data["urlInput"] ?? null;
-$download = $data['download'] ?? null;
 
 $objYtDlpAudio = new YtDplAudio();
 $objYtDlpAudio->setPath(path: dirname(__DIR__) . "/file_temp");
@@ -17,21 +16,17 @@ $objYtDlpAudio->setAudioFormat(audioFormat: "mp3");
 
 $fileName = $objYtDlpAudio->getMideaName($url);
 
-$objYtDlpAudio->setNameFile(nameFile: $fileName);
+$tempFileName = md5($fileName);
 
-if(!$download) {
-    $objYtDlpAudio->extractFile();    
-    $daration = $objYtDlpAudio->extractInfoFile();
-    echo json_encode(array(
-        "status" => true,
-        "duracao" => $daration,
-    ));
-} else {
-    $minValueDisplay = $data["minValueDisplay"];
-    $maxValueDisplay = $data["maxValueDisplay"];    
-    $objResponse = $objYtDlpAudio->cutFile($minValueDisplay, $maxValueDisplay, $fileName);
-    $objYtDlpAudio->download($fileName);
+$objYtDlpAudio->setFileName(fileName: $tempFileName);
 
-    // echo $objResponse;
-}
+$objYtDlpAudio->generateFile();    
+
+$daration = $objYtDlpAudio->extractInfoFile();
+
+echo json_encode(array(
+    "status" => true,
+    "duracao" => $daration,
+));
+
 ?>
