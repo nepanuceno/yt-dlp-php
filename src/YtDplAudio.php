@@ -91,7 +91,7 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
 
     public function buildCommand()
     {
-        $nomeArquivo = $this->getFileName();
+        $nomeArquivo = $this->getFileName();        
         $comando = sprintf(
             'yt-dlp %s -x --audio-format %s --no-restrict-filenames -o "%s.%s" -P %s %s',
             $this->getPlaylist(),

@@ -8,10 +8,14 @@
     <!-- wRunner CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/range.css">
-    <link rel="stylesheet" href="assets/css/spinner.css">
+    <link rel="stylesheet" href="assets/css/loading.css">
 </head>
 <body>
     <div class="container">
+        <div class="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
+
         <form id="urlForm" action="baixar.php" method="POST">
             <div class="form-group">
                 <label for="urlInput">Digite uma URL válida:</label>
@@ -56,10 +60,7 @@
                     <option value="flac">FLAC - Compressão sem perdas</option>
                 </select>
             </div>
-            
-            <div class="spinner-container">
-                <div class="spinner"></div>
-            </div>
+
             <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
         </form>
         <button type="button" class="btn" id="btnSendRangeTime">Download</button>

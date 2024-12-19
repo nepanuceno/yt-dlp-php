@@ -6,11 +6,13 @@ btnSendTimeRange.addEventListener('click', function(e){
     const minValueDisplay = document.querySelector('#minValueDisplay').innerHTML;
     const maxValueDisplay = document.querySelector('#maxValueDisplay').innerHTML;
     const urlInput = document.getElementById('urlInput');
+    const audioFormat = document.getElementById('audioFormat').value;
+
 
     const urlMidea = urlInput.value.trim();
 
     
-    sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea);
+    sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea, audioFormat);
 });
 
 function getExtensionFromFilename(filename) 
@@ -33,7 +35,7 @@ function getFileName(response)
     return filename;
 }
 
-function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
+function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea, audioFormat)
 {
     let url = 'cutter.php';
     let filename;
@@ -45,7 +47,7 @@ function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
         'minValueDisplay':minValueDisplay,
         'maxValueDisplay':(maxValueDisplay - minValueDisplay),
         'urlInput': urlMidea,
-        'download' : true
+        'audioFormat': audioFormat
     }
 
     // Make the POST request

@@ -1,20 +1,33 @@
 var form = document.getElementById('urlForm');
+
+// Para mostrar o loading
+function showLoading() {
+    document.querySelector('.loading-overlay').classList.add('loading');
+}
+
+// Para esconder o loading
+function hideLoading() {
+    document.querySelector('.loading-overlay').classList.remove('loading');
+}
+
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     
     const urlInput = document.getElementById('urlInput');
     const errorMessageElement = document.getElementById('errorMessage');
+    const audioFormat = document.getElementById('audioFormat').value;
     const urlMidea = urlInput.value.trim();
     const url = 'extract.php';
 
     const data = {
         urlInput: urlMidea,
+        audioFormat: audioFormat
     };
 
     // Limpa mensagens anteriores
     errorMessageElement.textContent = '';
     urlInput.classList.remove('error');
-    document.querySelector('.spinner-container').style.display = 'flex';
+    showLoading();
     
     // Regex para validação de URL
     const urlRegex = new RegExp(
@@ -56,7 +69,7 @@ form.addEventListener('submit', function(event) {
         const rangeWrapper = document.getElementById('rangeWrapper');
         const rangeSelector = new DynamicRangeSelector(rangeWrapper);
         
-        document.querySelector('.spinner-container').style.display = 'none';
+        hideLoading();
         document.querySelector('#btnSendUrl').style.display = 'none';
         document.querySelector('#btnSendRangeTime').style.display = 'block';
         console.log('Success:', valueMaxRange, maxTime); // Handle the response data
