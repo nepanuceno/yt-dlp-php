@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/range.css">
     <link rel="stylesheet" href="assets/css/loading.css">
+    <link rel="stylesheet" href="assets/css/listaSuportados.css">
 </head>
 <body>
     <div class="container">
@@ -16,6 +17,62 @@
             <div class="loading-spinner"></div>
         </div>
 
+        <div class="content-wrapper">
+            <!-- Coluna esquerda com sites suportados -->
+            <div class="supported-sites">
+            <h2>Sites Suportados</h2>
+        
+            <div class="sites-category">
+                <h3>Plataformas de Vídeo</h3>
+                <ul class="sites-list">
+                    <li>
+                        <span class="site-name">YouTube</span>
+                        <span class="site-desc">Vídeos e playlists</span>
+                    </li>
+                    <li>
+                        <span class="site-name">Vimeo</span>
+                        <span class="site-desc">Vídeos e canais</span>
+                    </li>
+                    <li>
+                        <span class="site-name">Dailymotion</span>
+                        <span class="site-desc">Vídeos</span>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="sites-category">
+            <h3>Redes Sociais</h3>
+            <ul class="sites-list">
+                <li>
+                    <span class="site-name">Instagram</span>
+                </li>
+                <li>
+                    <span class="site-name">Facebook</span>
+                </li>
+                <li>
+                    <span class="site-name">TikTok</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sites-category">
+            <h3>Áudio</h3>
+            <ul class="sites-list">
+                <li>
+                    <span class="site-name">SoundCloud</span>
+                </li>
+                <li>
+                    <span class="site-name">Spotify</span>
+                </li>
+                <li>
+                    <span class="site-name">Bandcamp</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Coluna direita com o formulário -->
+    <div class="form-container">
         <form id="urlForm" action="baixar.php" method="POST">
             <div class="form-group">
                 <label for="urlInput">Digite uma URL válida:</label>
@@ -38,34 +95,33 @@
                     data-start-min=""
                     data-start-max=""
                 >
-                <div class="range-track" id="rangeTrack"></div>
-                <div class="range-handle" id="minHandle"></div>
-                <div class="range-handle" id="maxHandle"></div>
+                    <div class="range-track" id="rangeTrack"></div>
+                    <div class="range-handle" id="minHandle"></div>
+                    <div class="range-handle" id="maxHandle"></div>
                 </div>
                 <div class="range-values">
                     <span id="minValueDisplay">0</span>
                     <span id="maxValueDisplay">1000</span>
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="audioFormat">Selecione o formato do áudio:</label>
                 <select id="audioFormat" name="audioFormat" required>
                     <option value="">Selecione um formato</option>
                     <option value="mp3">MP3 - Formato mais comum</option>
-                    <option value="m4a">M4A - Boa qualidade e tamanho reduzido</option>
-                    <option value="wav">WAV - Áudio sem compressão</option>
-                    <option value="opus">OPUS - Alta qualidade em baixo bitrate</option>
-                    <option value="vorbis">OGG/Vorbis - Formato livre</option>
-                    <option value="flac">FLAC - Áudio sem perdas</option>
-                    <option value="aac">AAC - Qualidade superior</option>
+                    <option value="m4a">M4A - Boa qualidade</option>
+                    <option value="wav">WAV - Sem compressão</option>
+                    <option value="opus">OPUS - Alta qualidade</option>
+                    <option value="vorbis">OGG - Formato livre</option>
                 </select>
             </div>
-
+            <div class="spinner-container">
+                <div class="spinner"></div>
+            </div>
             <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
         </form>
-        <button type="button" class="btn" id="btnSendRangeTime">Download</button>
     </div>
+</div>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/range.js"></script>
     <script src="assets/js/sendTimeRange.js"></script>

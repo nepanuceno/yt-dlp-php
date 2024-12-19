@@ -1,0 +1,88 @@
+.container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1024px;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.supported-sites {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.supported-sites h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.sites-category {
+    margin-bottom: 20px;
+}
+
+.sites-category h3 {
+    color: #3498db;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.sites-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sites-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+}
+
+.site-name {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.site-desc {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.85em;
+}
+
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .supported-sites {
+        order: 2;  /* Coloca a lista de sites abaixo do form em telas menores */
+    }
+    
+    .form-container {
+        order: 1;
+    }
+}
