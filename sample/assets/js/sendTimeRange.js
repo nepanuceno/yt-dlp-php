@@ -38,6 +38,9 @@ function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
     let url = 'cutter.php';
     let filename;
 
+    document.querySelector('.spinner-container').style.display = 'flex';
+    document.querySelector('#btnSendRangeTime').classList.add('disabled');
+    
     const data = {
         'minValueDisplay':minValueDisplay,
         'maxValueDisplay':(maxValueDisplay - minValueDisplay),
@@ -82,6 +85,7 @@ function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea)
             document.body.removeChild(link);
         }
         location.reload(true);
+        console.log('FIM');
     })
     .catch((error) => {
         console.error('Error:', error); // Handle any errors

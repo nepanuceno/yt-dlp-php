@@ -69,3 +69,9 @@
         #btnSendRangeTime {
             display: none;
         }
+
+        button:disabled { background-color: #ccc; 
+            /* Cor de fundo quando desabilitado */ 
+            color: #666; /* Cor do texto quando desabilitado */ 
+            cursor: not-allowed; /* Cursor indicando que está desabilitado */ 
+        }
