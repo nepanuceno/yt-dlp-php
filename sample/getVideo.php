@@ -12,7 +12,11 @@ $objYtDlpVideo = new YtDlpVideo();
 $objYtDlpVideo->setUrl($url);
 
 $info = $objYtDlpVideo->getInfoMedia();
+// var_dump($info) or die();
 
-echo json_encode([
-    'info' => $info
-]);
+
+// $json = $objYtDlpVideo->parseFormatOutput($info);
+
+// echo json_encode([
+//     'info' => $json
+// ]);
