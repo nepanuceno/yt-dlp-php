@@ -1,191 +1,196 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validador de URL</title>
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/range.css">
-    <link rel="stylesheet" href="assets/css/loading.css">
-    <link rel="stylesheet" href="assets/css/listaSuportados.css">
-</head>
-<body>
-    <div class="container">
-            <div class="loading-overlay">
-                <div class="loading-spinner"></div>
-            </div>
-
-            <div class="content-wrapper">
-                <!-- Coluna esquerda com sites suportados -->
-                <div class="supported-sites">
-                    <h2>Sites Suportados</h2>
-            
-                    <div class="sites-category">
-                        <h3>Plataformas de Vídeo</h3>
-                        <ul class="sites-list">
-                            <li>
-                                <span class="site-name">YouTube</span>
-                                <span class="site-desc">Vídeos e playlists</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Vimeo</span>
-                                <span class="site-desc">Vídeos e canais</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Dailymotion</span>
-                                <span class="site-desc">Vídeos</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="sites-category">
-                        <h3>Redes Sociais</h3>
-                        <ul class="sites-list">
-                            <li>
-                                <span class="site-name">Instagram</span>
-                                <span class="site-desc">Posts, reels e stories</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Facebook</span>
-                                <span class="site-desc">Vídeos públicos e watch</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Twitter/X</span>
-                                <span class="site-desc">Tweets com mídia</span>
-                            </li>
-                            <li>
-                                <span class="site-name">TikTok</span>
-                                <span class="site-desc">Vídeos e áudios</span>
-                            </li>
-                            <li>
-                                <span class="site-name">LinkedIn</span>
-                                <span class="site-desc">Posts com mídia</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Reddit</span>
-                                <span class="site-desc">Posts e subreddits</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="sites-category">
-                        <h3>Plataformas de Áudio</h3>
-                        <ul class="sites-list">
-                            <li>
-                                <span class="site-name">SoundCloud</span>
-                                <span class="site-desc">Faixas e playlists</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Spotify</span>
-                                <span class="site-desc">Faixas públicas</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Bandcamp</span>
-                                <span class="site-desc">Álbuns e faixas</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Mixcloud</span>
-                                <span class="site-desc">Sets e shows</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="sites-category">
-                        <h3>Streaming e Educação</h3>
-                        <ul class="sites-list">
-                            <li>
-                                <span class="site-name">Twitch</span>
-                                <span class="site-desc">Streams e clipes</span>
-                            </li>
-                            <li>
-                                <span class="site-name">Udemy</span>
-                                <span class="site-desc">Aulas e cursos</span>
-                            </li>
-                            <li>
-                                <span class="site-name">ESPN</span>
-                                <span class="site-desc">Clipes esportivos</span>
-                            </li>
-                            <li>
-                                <span class="site-name">PBS</span>
-                                <span class="site-desc">Documentários e shows</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="sites-category">
-                        <h3>Outras Plataformas Suportadas</h3>
-                        <ul class="sites-list">
-                            <li>
-                                <button class="btn" id="consultaPlataformas">Consultar</button>
-                            </li>
-                        </ul>
-                    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Baixador de Mídeas</title>
+        
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/range.css">
+        <link rel="stylesheet" href="assets/css/loading.css">
+        <link rel="stylesheet" href="assets/css/listaSuportados.css">
+    </head>
+    <body>
+        <div class="container">
+                <div class="loading-overlay">
+                    <div class="loading-spinner"></div>
                 </div>
 
-                <!-- Coluna direita com o formulário -->
-                <div class="form-container">
-                    <form id="urlForm" action="baixar.php" method="POST">
-                        <div class="form-group">
-                            <label for="urlInput">Digite uma URL válida:</label>
-                            <input 
-                                type="text" 
-                                id="urlInput" 
-                                name="urlInput" 
-                                placeholder="https://www.youtube.com/watch?v=UzZTKgPLUYg" 
-                                required
-                            >
-                            <div id="errorMessage" class="error-message"></div>
-                        </div>
-                        <div class="range-selector-container">
-                            <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar o áudio</div>
-                            <div 
-                                class="range-wrapper" 
-                                id="rangeWrapper" 
-                                data-min="0" 
-                                data-max="0" 
-                                data-start-min=""
-                                data-start-max=""
-                            >
-                                <div class="range-track" id="rangeTrack"></div>
-                                <div class="range-handle" id="minHandle"></div>
-                                <div class="range-handle" id="maxHandle"></div>
-                            </div>
-                            <div class="range-values">
-                                <span id="minValueDisplay">0</span>
-                                <span id="maxValueDisplay">1000</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="audioFormat">Selecione o formato do áudio:</label>
-                            <select id="audioFormat" name="audioFormat" required>
-                                <option value="">Selecione um formato</option>
-                                <option value="mp3">MP3 - Formato mais comum</option>
-                                <option value="m4a">M4A - Boa qualidade</option>
-                                <option value="wav">WAV - Sem compressão</option>
-                                <option value="opus">OPUS - Alta qualidade</option>
-                                <option value="vorbis">OGG - Formato livre</option>
-                            </select>
-                        </div>
-                        <div class="spinner-container">
-                            <div class="spinner"></div>
-                        </div>
-                        <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
-                    </form>
-                    <button type="button" class="btn" id="btnSendRangeTime">Download</button>
-                    <div class="supported-sites" id="supported-sites-list">
-                        <h2>Plataformas Suportados</h2>
+                <div class="content-wrapper">
+                    <!-- Coluna esquerda com sites suportados -->
+                    <div class="supported-sites">
+                        <h2>Sites Suportados</h2>
+                
                         <div class="sites-category">
-                            <ul id="listaResposta"></ul>
+                            <h3>Plataformas de Vídeo</h3>
+                            <ul class="sites-list">
+                                <li>
+                                    <span class="site-name">YouTube</span>
+                                    <span class="site-desc">Vídeos e playlists</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Vimeo</span>
+                                    <span class="site-desc">Vídeos e canais</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Dailymotion</span>
+                                    <span class="site-desc">Vídeos</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sites-category">
+                            <h3>Redes Sociais</h3>
+                            <ul class="sites-list">
+                                <li>
+                                    <span class="site-name">Instagram</span>
+                                    <span class="site-desc">Posts, reels e stories</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Facebook</span>
+                                    <span class="site-desc">Vídeos públicos e watch</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Twitter/X</span>
+                                    <span class="site-desc">Tweets com mídia</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">TikTok</span>
+                                    <span class="site-desc">Vídeos e áudios</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">LinkedIn</span>
+                                    <span class="site-desc">Posts com mídia</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Reddit</span>
+                                    <span class="site-desc">Posts e subreddits</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sites-category">
+                            <h3>Plataformas de Áudio</h3>
+                            <ul class="sites-list">
+                                <li>
+                                    <span class="site-name">SoundCloud</span>
+                                    <span class="site-desc">Faixas e playlists</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Spotify</span>
+                                    <span class="site-desc">Faixas públicas</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Bandcamp</span>
+                                    <span class="site-desc">Álbuns e faixas</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Mixcloud</span>
+                                    <span class="site-desc">Sets e shows</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sites-category">
+                            <h3>Streaming e Educação</h3>
+                            <ul class="sites-list">
+                                <li>
+                                    <span class="site-name">Twitch</span>
+                                    <span class="site-desc">Streams e clipes</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">Udemy</span>
+                                    <span class="site-desc">Aulas e cursos</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">ESPN</span>
+                                    <span class="site-desc">Clipes esportivos</span>
+                                </li>
+                                <li>
+                                    <span class="site-name">PBS</span>
+                                    <span class="site-desc">Documentários e shows</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="sites-category">
+                            <h3>Outras Plataformas Suportadas</h3>
+                            <ul class="sites-list">
+                                <li>
+                                    <button class="btn" id="consultaPlataformas">Consultar</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Coluna direita com o formulário -->
+                    <div class="form-container">
+                        <form id="urlForm" action="baixar.php" method="POST">
+                            <div class="form-group">
+                                <label for="urlInput">Digite uma URL válida:</label>
+                                <input 
+                                    type="text" 
+                                    id="urlInput" 
+                                    name="urlInput" 
+                                    placeholder="https://www.youtube.com/watch?v=UzZTKgPLUYg" 
+                                    required
+                                >
+                                <div id="errorMessage" class="error-message"></div>
+                            </div>
+                            <div class="range-selector-container">
+                                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar o áudio</div>
+                                <div 
+                                    class="range-wrapper" 
+                                    id="rangeWrapper" 
+                                    data-min="0" 
+                                    data-max="0" 
+                                    data-start-min=""
+                                    data-start-max=""
+                                >
+                                    <div class="range-track" id="rangeTrack"></div>
+                                    <div class="range-handle" id="minHandle"></div>
+                                    <div class="range-handle" id="maxHandle"></div>
+                                </div>
+                                <div class="range-values">
+                                    <span id="minValueDisplay">0</span>
+                                    <span id="maxValueDisplay">1000</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="audioFormat">Selecione o formato do áudio:</label>
+                                <select id="audioFormat" name="audioFormat" required>
+                                    <option value="">Selecione um formato</option>
+                                    <option value="mp3">MP3 - Formato mais comum</option>
+                                    <option value="m4a">M4A - Boa qualidade</option>
+                                    <option value="wav">WAV - Sem compressão</option>
+                                    <option value="opus">OPUS - Alta qualidade</option>
+                                    <option value="vorbis">OGG - Formato livre</option>
+                                </select>
+                            </div>
+                            <div class="form-group checkbox-container">
+                                <label for="audioOnly">Baixar somente áudio:</label>
+                                <input type="checkbox" id="audioOnly" name="audioOnly" value="1">
+                            </div>
+                            <div class="spinner-container">
+                                <div class="spinner"></div>
+                            </div>
+                            <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
+                        </form>
+                        <button type="button" class="btn" id="btnSendRangeTime">Download</button>
+                        <div class="supported-sites" id="supported-sites-list">
+                            <h2>Plataformas Suportados</h2>
+                            <div class="sites-category">
+                                <ul id="listaResposta"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/range.js"></script>
-    <script src="assets/js/sendTimeRange.js"></script>
-    <script src="assets/js/listaPlataformasSuportadadas.js"></script>
-
-</body>
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/range.js"></script>
+        <script src="assets/js/sendTimeRange.js"></script>
+        <script src="assets/js/validateURL.js"></script>
+        <script src="assets/js/getInfoMedia.js"></script>
+        <script src="assets/js/listaPlataformasSuportadadas.js"></script>
+    </body>
 </html>

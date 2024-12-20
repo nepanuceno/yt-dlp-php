@@ -17,22 +17,22 @@
 
     public function __construct(){}
 
-    public function setUrl( $url): void {$this->url = $url;}
+    public function setUrl($url): void {$this->url = $url;}
 
-	public function setPath( $path): void {$this->path = $path;}
+	public function setPath($path): void {$this->path = $path;}
 
-	public function setPlaylist( $playlist): void {$this->playlist = $playlist;}
+	public function setPlaylist($playlist): void {$this->playlist = $playlist;}
 
-	public function setWriteDescription( $writeDescription): void {$this->writeDescription = $writeDescription;}
+	public function setWriteDescription($writeDescription): void {$this->writeDescription = $writeDescription;}
 
-	public function setWriteComments( $writeComments): void {$this->writeComments = $writeComments;}
+	public function setWriteComments($writeComments): void {$this->writeComments = $writeComments;}
 
-	public function setWriteThumbnail( $writeThumbnail): void {$this->writeThumbnail = $writeThumbnail;}
+	public function setWriteThumbnail($writeThumbnail): void {$this->writeThumbnail = $writeThumbnail;}
 
-	public function setWriteLink( $writeLink): void {$this->writeLink = $writeLink;}
+	public function setWriteLink($writeLink): void {$this->writeLink = $writeLink;}
 
 
-    public function getUrl():string {return $this->url;}
+    public function getUrl():?string {return $this->url;}
 
 	public function getPath():?string
     {
