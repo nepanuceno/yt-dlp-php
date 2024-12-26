@@ -108,6 +108,6 @@
             cursor: not-allowed; /* Cursor indicando que está desabilitado */ 
         }
 
-        #supported-sites-list {
+        #supported-sites-list, #select-video {
             display: none;
         }

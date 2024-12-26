@@ -12,7 +12,6 @@ $objYtDlpVideo = new YtDlpVideo();
 $objYtDlpVideo->setUrl($url);
 
 $info = $objYtDlpVideo->getInfoMedia();
-// var_dump($info) or die();
 
 
 // $json = $objYtDlpVideo->parseFormatOutput($info);

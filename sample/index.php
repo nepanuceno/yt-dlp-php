@@ -135,6 +135,12 @@
                                 >
                                 <div id="errorMessage" class="error-message"></div>
                             </div>
+
+                            <div class="form-group checkbox-container">
+                                <label for="audioOnly">Baixar somente áudio:</label>
+                                <input type="checkbox" id="audioOnly" name="audioOnly" value="1">
+                            </div>
+
                             <div class="range-selector-container">
                                 <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar o áudio</div>
                                 <div 
@@ -154,10 +160,15 @@
                                     <span id="maxValueDisplay">1000</span>
                                 </div>
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group" id="select-video">
+                                <label for="videoFormat">Selecione uma opção de vídeo:</label>
+                            </div>
+
+                            <div class="form-group" id="select-ext-audio">
                                 <label for="audioFormat">Selecione o formato do áudio:</label>
                                 <select id="audioFormat" name="audioFormat" required>
-                                    <option value="">Selecione um formato</option>
+                                    <option value="0">Selecione...</option>
                                     <option value="mp3">MP3 - Formato mais comum</option>
                                     <option value="m4a">M4A - Boa qualidade</option>
                                     <option value="wav">WAV - Sem compressão</option>
@@ -165,13 +176,13 @@
                                     <option value="vorbis">OGG - Formato livre</option>
                                 </select>
                             </div>
-                            <div class="form-group checkbox-container">
-                                <label for="audioOnly">Baixar somente áudio:</label>
-                                <input type="checkbox" id="audioOnly" name="audioOnly" value="1">
-                            </div>
+
+                          
+
                             <div class="spinner-container">
                                 <div class="spinner"></div>
                             </div>
+
                             <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
                         </form>
                         <button type="button" class="btn" id="btnSendRangeTime">Download</button>

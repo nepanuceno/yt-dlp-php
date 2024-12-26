@@ -3,13 +3,12 @@ namespace YtDpl;
 
 class YtDlpVideo extends YtDpl
 {
-    public function getInfoMedia(): bool|string
+    public function getInfoMedia(): void
     {        
-        $a = system('yt-dlp -F '. $this->getUrl());
-        return $a;
+        passthru('yt-dlp -F '. $this->getUrl());
     }
 
-    public function parseFormatOutput(string $output): string {
+    private function parseFormatOutput(string $output): string {
         // Divide a string de entrada em linhas
         $lines = explode("\n", $output);
         $formats = [];
