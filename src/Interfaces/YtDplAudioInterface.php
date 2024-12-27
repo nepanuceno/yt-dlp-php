@@ -7,8 +7,9 @@ interface YtDplAudioInterface
     public function download($fileName);
     public function setAudioFormat($audioFormat);
     public function getAudioFormat();
-    public function buildCommand();
-    public function extractInfoFile();
+    public function getOptionsExtensionFile(): void;
+    public function buildCommandDownloadMedia(): string;
+    public function getDurationMedia(): bool|string;
     public function cutFile($minValueDisplay, $maxValueDisplay, $fileName);
-    public function getMideaName($url): bool|string;
+    public function getInfoMedia(): void;
 }

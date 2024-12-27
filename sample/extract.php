@@ -2,32 +2,29 @@
 
 require_once "../vendor/autoload.php";
 
-use YtDpl\YtDplAudio;
+use YtDpl\YtDplMedia;
 
 header("Content-Type: application/json; charset=utf-8");
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 $url = $data["urlInput"] ?? null;
-$audioFormat = $data["audioFormat"] ?? null;
+// $audioFormat = $data["audioFormat"] ?? null;
 
-$objYtDlpAudio = new YtDplAudio();
-$objYtDlpAudio->setPath(path: dirname(__DIR__) . "/file_temp");
-$objYtDlpAudio->setUrl(url: $url);
-$objYtDlpAudio->setPlaylist(playlist: true);
-$objYtDlpAudio->setAudioFormat(audioFormat: $audioFormat);
+$objYtDlpMedia = new YtDplMedia();
+$objYtDlpMedia->setPath(path: dirname(__DIR__) . "/file_temp");
+$objYtDlpMedia->setUrl(url: $url);
+$objYtDlpMedia->setPlaylist(playlist: true);
 
-$fileName = $objYtDlpAudio->getMideaName($url);
+$fileName = $objYtDlpMedia->getMideaName($url);
 
 $tempFileName = md5($fileName);
 
-$objYtDlpAudio->setFileName(fileName: $tempFileName);
+$objYtDlpMedia->setFileName(fileName: $tempFileName);
 
-$objYtDlpAudio->generateFile();    
-
-$daration = $objYtDlpAudio->extractInfoFile();
+$daration = $objYtDlpMedia->getDurationMedia();
 
 echo json_encode(array(
     "status" => true,
-    "duracao" => $daration,
+    "duracao" => $daration
 ));
 
 ?>

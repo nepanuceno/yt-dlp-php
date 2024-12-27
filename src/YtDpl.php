@@ -1,8 +1,9 @@
 <?php
- namespace YtDpl;
 
- class YtDpl
- {
+namespace YtDpl;
+
+class YtDpl
+{
     public $url;
     public $path;
     public $playlist;
@@ -14,27 +15,55 @@
     public $nameMidea;
     public $audioFormat;
     public $fileName;
+    public $idOptionMedia;
+    public $fileNameFormated;
 
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
-    public function setUrl($url): void {$this->url = $url;}
+    public function setUrl($url): void
+    {
+        $this->url = $url;
+    }
 
-	public function setPath($path): void {$this->path = $path;}
+    public function setPath($path): void
+    {
+        $this->path = $path;
+    }
 
-	public function setPlaylist($playlist): void {$this->playlist = $playlist;}
+    public function setPlaylist($playlist): void
+    {
+        $this->playlist = $playlist;
+    }
 
-	public function setWriteDescription($writeDescription): void {$this->writeDescription = $writeDescription;}
+    public function setWriteDescription($writeDescription): void
+    {
+        $this->writeDescription = $writeDescription;
+    }
 
-	public function setWriteComments($writeComments): void {$this->writeComments = $writeComments;}
+    public function setWriteComments($writeComments): void
+    {
+        $this->writeComments = $writeComments;
+    }
 
-	public function setWriteThumbnail($writeThumbnail): void {$this->writeThumbnail = $writeThumbnail;}
+    public function setWriteThumbnail($writeThumbnail): void
+    {
+        $this->writeThumbnail = $writeThumbnail;
+    }
 
-	public function setWriteLink($writeLink): void {$this->writeLink = $writeLink;}
+    public function setWriteLink($writeLink): void
+    {
+        $this->writeLink = $writeLink;
+    }
 
 
-    public function getUrl():?string {return $this->url;}
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
 
-	public function getPath():?string
+    public function getPath(): ?string
     {
         if ($this->path) {
             return $this->path;
@@ -46,16 +75,16 @@
      * Summary of getNameFile
      * @return string|null
      */
-    public function getNameFile():?string
+    public function getNameFile(): ?string
     {
         if ($this->fileName) {
-           return $this->fileName;
+            return $this->fileName;
         }
-        
+
         return null;
     }
 
-	public function getPlaylist():?string
+    public function getPlaylist(): ?string
     {
         if ($this->playlist) {
             return "--yes-playlist";
@@ -63,21 +92,23 @@
         return null;
     }
 
-	public function getWriteDescription():?string {
+    public function getWriteDescription(): ?string
+    {
         if ($this->writeDescription) {
             return "--write-description";
         }
         return null;
     }
 
-	public function getWriteComments():?string {
+    public function getWriteComments(): ?string
+    {
         if ($this->writeComments) {
             return "--write-comments";
         }
         return null;
     }
 
-	public function getWriteThumbnail():?string 
+    public function getWriteThumbnail(): ?string
     {
         if ($this->writeThumbnail) {
             return "--write-thumbnail";
@@ -85,7 +116,7 @@
         return null;
     }
 
-	public function getWriteLink():?string
+    public function getWriteLink(): ?string
     {
         if ($this->writeLink) {
             return "--write-link";
@@ -94,13 +125,17 @@
     }
 
 
-    public function getMideaName($url): bool|string
+    public function getMideaName(): bool|string
     {
-        $pathCutFile = $this->nameMidea = exec('yt-dlp --get-filename -o "%(title)s" '.$url);
-        $pathCutFile = preg_replace('/[^a-z0-9._ \/]/', '', strtolower($pathCutFile));
-        $pathCutFile = str_replace(' ', '-',  $pathCutFile);
+        $pathCutFile = exec('yt-dlp --get-title '. $this->getUrl(), $title);
+        $this->fileNameFormated = $pathCutFile;
+        return $pathCutFile;
+    }
 
-        return  $pathCutFile;
+    public function getFileNameFormated()
+    {
+        $pathCutFile = preg_replace('/[^a-z0-9._ \/]/', '', strtolower($this->fileNameFormated));
+        return str_replace(' ', '-', $pathCutFile);
     }
 
     public function setAudioFormat($audioFormat)
@@ -122,4 +157,14 @@
     {
         $this->fileName = $fileName;
     }
- }
+
+    public function getIdOptionMedia()
+    {
+        return $this->idOptionMedia;
+    }
+
+    public function setIdOptionMedia($id): void
+    {
+        $this->idOptionMedia = $id;
+    }
+}

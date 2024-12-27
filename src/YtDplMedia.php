@@ -3,7 +3,7 @@ namespace YtDpl;
 
 use YtDpl\Interfaces\YtDplAudioInterface;
 
-class YtDplAudio extends YtDpl implements YtDplAudioInterface
+class YtDplMedia extends YtDpl implements YtDplAudioInterface
 {
     public $audioFormat;
 
@@ -21,12 +21,12 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
 
     public function generateFile(): bool|string
     {
-        $comando = $this->buildCommand();
+        $comando = $this->buildCommandDownloadMedia();
         try {
             exec($comando);
             return json_encode([
                 'status'=>true,
-                'messagem' => 'Áudio Extraído'
+                'messagem' => 'Mídea Extraída'
             ]);
         } catch (\Throwable $th) {
             return json_encode([
@@ -39,7 +39,7 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
     public function cutFile($minValueDisplay, $maxValueDisplay, $fileName): bool|string{
         try {
             $path = $this->getPath().'/'.$this->getFileName().'.'.$this->getAudioFormat();
-            $pathCutFile = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();
+            $pathCutFile = $this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat();
                         
             $comando = sprintf(
                 'ffmpeg -i %s -ss %s -t %s -c copy %s',
@@ -47,8 +47,9 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
                 $minValueDisplay,
                 $maxValueDisplay,
                 $pathCutFile
-            );
-            exec($comando);            
+            );            
+            
+            $resp = exec($comando, $resp);                        
             
             return json_encode([
                 'status'=> true,
@@ -62,12 +63,38 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
         }
     }
 
-    public function extractInfoFile(): bool|string {
-        $path = $this->getPath().'/'.$this->getFileName().'.'.$this->getAudioFormat();
-
-        return exec('ffprobe -i '.escapeshellarg($path).' -show_entries format=duration -v quiet -of csv="p=0"');
+    public function getOptionsExtensionFile(): void
+    {
+        passthru('yt-dlp -F '. $this->getUrl());
     }
-	
+
+    public function getDurationMedia(): bool|string
+    {
+        $duration = exec('yt-dlp --get-duration '. $this->getUrl(), $duration);
+        $arrDuration = explode(':',$duration);
+
+        return (int)($arrDuration[0]*60) + (int)$arrDuration[1];
+    }
+
+    // public function getNameMidea(): bool|string
+    // {        
+    //     return exec('yt-dlp --get-title '. $this->getUrl(), $title);
+    // }
+
+    public function getInfoMedia(): void
+    {        
+        passthru('yt-dlp -F '. $this->getUrl());
+    }
+    
+    public function buildCommandDownloadMedia(): string {
+        return sprintf(
+            'yt-dlp -f %s -P %s %s',
+            $this->getIdOptionMedia(),
+            $this->getPath(),
+            $this->getUrl()
+        );
+    }
+
     public function download($fileName)
     {
         set_time_limit(0);
@@ -88,19 +115,4 @@ class YtDplAudio extends YtDpl implements YtDplAudioInterface
             exit;
         }
     }
-
-    public function buildCommand()
-    {
-        $nomeArquivo = $this->getFileName();        
-        $comando = sprintf(
-            'yt-dlp %s -x --audio-format %s --no-restrict-filenames -o "%s.%s" -P %s %s',
-            $this->getPlaylist(),
-            $this->getAudioFormat(),
-            $nomeArquivo,
-            $this->getAudioFormat(),
-            $this->getPath(),
-            $this->getUrl()
-        );
-        return $comando;
-    }   
 }

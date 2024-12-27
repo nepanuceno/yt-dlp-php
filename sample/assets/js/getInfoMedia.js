@@ -1,14 +1,12 @@
 const urlInput = document.querySelector('#urlInput');
 
+
 function parseVideoInfo(text) {
     const lines = text.split('\n').filter(line => line && !line.includes('--') && !line.includes('youtube') && !line.includes('info'));
-    const parts = lines[0].split(/([^A-Za-z])/);
-    const headers = parts.filter(part => /[A-Za-z]+/.test(part));
-    const columns = headers.flat();
     let result = [];
     
     for(i=1; i<lines.length; i++) {
-        const line = lines[i].split(/([^A-Za-z0-9])/);
+        const line = lines[i].split(/([^A-Za-z0-9-])/);
         const infos = line.filter(info => {
             return /[A-Za-z0-9]+/.test(info) && !line.includes('images') && !line.length==0
         });
@@ -48,6 +46,7 @@ const createSelect = (options, selectId = '', onChange = null) => {
     options.forEach(item => {
         const option = document.createElement('option');
         option.value = item.value || item;
+        option.setAttribute('data-extension', item.extension);
         option.textContent = item.text || item;
         select.appendChild(option);
     });
@@ -60,16 +59,14 @@ const createSelect = (options, selectId = '', onChange = null) => {
     return select;
 };
 
-
-urlInput.addEventListener('focusout', (e) => {
-    e.preventDefault();
+function getInfoMedia()
+{
     const url = urlInput.value;
-    const ul = document.createElement('ul');
-
     const formData = new FormData();
-    formData.append('urlInput', url);
 
-    fetch('getVideo.php', {
+    formData.append('urlInput', url);
+ 
+    fetch('getMediaOptions.php', {
         method: 'POST',
         body: formData
     })
@@ -78,13 +75,14 @@ urlInput.addEventListener('focusout', (e) => {
         const videoData = parseVideoInfo(data);
         let optionsWithValues = [];
         optionsWithValues.push({
-            'value': 0,
+            'value': "0",
             'text': 'Selecione um formato de vídeo'
         });
         
         videoData.forEach(info => {
             optionsWithValues.push({
                 'value': info[0],
+                'extension': info[1],
                 'text': `Formato: ${info[1]} - Resolução: ${ info[2] } - Tamanho: ${info[5]}`
             });            
         });
@@ -97,9 +95,8 @@ urlInput.addEventListener('focusout', (e) => {
 
         document.querySelector('#select-video').style.display = 'block';
         document.getElementById('select-video').appendChild(select);
-
     })
     .catch((error) => {
         console.error('Error:', error);
     });
-});
+};

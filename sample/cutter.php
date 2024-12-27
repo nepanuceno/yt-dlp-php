@@ -2,25 +2,33 @@
 
 require_once "../vendor/autoload.php";
 
-use YtDpl\YtDplAudio;
+use YtDpl\YtDplMedia;
 
 header("Content-Type: application/json; charset=utf-8");
 
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 
 $url = $data["urlInput"] ?? null;
-$audioFormat = $data["audioFormat"];
 
-$objYtDlpAudio = new YtDplAudio();
-$objYtDlpAudio->setPath(path: dirname(__DIR__) . "/file_temp");
-$objYtDlpAudio->setAudioFormat(audioFormat: $audioFormat);
-$fileName = $objYtDlpAudio->getMideaName($url);
-$tempFileName = md5($fileName);
+$audioFormat = $data["extension"];
+$id = $data["videoFormat"] ?? 'm4a';
 
-$objYtDlpAudio->setFileName(fileName: $tempFileName);
+$objYtDlpMedia = new YtDplMedia();
+$objYtDlpMedia->setPath(path: dirname(__DIR__) . "/file_temp");
+$objYtDlpMedia->setUrl(url: $url);
+$objYtDlpMedia->setIdOptionMedia($audioFormat);
+$objYtDlpMedia->setAudioFormat(audioFormat: $audioFormat);
+$objYtDlpMedia->setIdOptionMedia($id);
+// $fileName = $objYtDlpMedia->getMideaName($url);
+// $tempFileName = md5($fileName);
+
+$fileName = $objYtDlpMedia->getMideaName();
+
+$objYtDlpMedia->setFileName(fileName: $fileName);
+$objYtDlpMedia->generateFile();
 
 $minValueDisplay = $data["minValueDisplay"];
 $maxValueDisplay = $data["maxValueDisplay"];
 
-$objYtDlpAudio->cutFile($minValueDisplay, $maxValueDisplay, $fileName);    
-$objYtDlpAudio->download($fileName);
+$objYtDlpMedia->cutFile($minValueDisplay, $maxValueDisplay, $fileName);
+$objYtDlpMedia->download($fileName);

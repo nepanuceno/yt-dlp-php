@@ -1,4 +1,4 @@
-const btnSendTimeRange = document.querySelector('#btnSendRangeTime');
+const btnDownload = document.querySelector('#btnDownload');
 
 function showLoading() {
     document.querySelector('.loading-overlay').classList.add('loading');
@@ -9,19 +9,33 @@ function hideLoading() {
     document.querySelector('.loading-overlay').classList.remove('loading');
 }
 
-btnSendTimeRange.addEventListener('click', function(e){
+btnDownload.addEventListener('click', function(e){
     e.preventDefault();
 
     const minValueDisplay = document.querySelector('#minValueDisplay').innerHTML;
     const maxValueDisplay = document.querySelector('#maxValueDisplay').innerHTML;
     const urlInput = document.getElementById('urlInput');
-    const audioFormat = document.getElementById('audioFormat').value;
+    const audioFormat = '';//document.getElementById('audioFormat').value;
 
+    const elementOptions = document.querySelector('#videoFormat');
+    const selectedOption = elementOptions.options[elementOptions.selectedIndex];
+    const videoFormat = selectedOption.value;
+    const extension = selectedOption.getAttribute('data-extension');
+
+    console.log("CONSOLE:", extension, videoFormat);
 
     const urlMidea = urlInput.value.trim();
 
+    const data = {
+        'minValueDisplay':minValueDisplay,
+        'maxValueDisplay':(maxValueDisplay - minValueDisplay),
+        'urlInput': urlMidea,
+        'audioFormat': audioFormat,
+        'videoFormat': videoFormat,
+        'extension': extension,
+    }
     
-    sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea, audioFormat);
+    sendDataRangeTime(data);
 });
 
 function getExtensionFromFilename(filename) 
@@ -44,20 +58,14 @@ function getFileName(response)
     return filename;
 }
 
-function sendDataRangeTime(minValueDisplay, maxValueDisplay, urlMidea, audioFormat)
+function sendDataRangeTime(data)
 {
     let url = 'cutter.php';
     let filename;
 
     showLoading();
-    document.querySelector('#btnSendRangeTime').classList.add('disabled');
+    document.querySelector('#btnDownload').classList.add('disabled');
     
-    const data = {
-        'minValueDisplay':minValueDisplay,
-        'maxValueDisplay':(maxValueDisplay - minValueDisplay),
-        'urlInput': urlMidea,
-        'audioFormat': audioFormat
-    }
 
     // Make the POST request
     fetch(url, {

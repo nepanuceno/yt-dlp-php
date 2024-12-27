@@ -15,13 +15,13 @@ form.addEventListener('submit', function(event) {
     
     const urlInput = document.getElementById('urlInput');
     const errorMessageElement = document.getElementById('errorMessage');
-    const audioFormat = document.getElementById('audioFormat').value;
+    // const audioFormat = document.getElementById('audioFormat').value;
     const urlMidea = urlInput.value.trim();
     const url = 'extract.php';
 
     const data = {
         urlInput: urlMidea,
-        audioFormat: audioFormat
+        // audioFormat: audioFormat
     };
 
     // Limpa mensagens anteriores
@@ -71,8 +71,10 @@ form.addEventListener('submit', function(event) {
         
         hideLoading();
         document.querySelector('#btnSendUrl').style.display = 'none';
-        document.querySelector('#btnSendRangeTime').style.display = 'block';
+        document.querySelector('#btnDownload').style.display = 'block';
         console.log('Success:', valueMaxRange, maxTime); // Handle the response data
+
+        getInfoMedia();
     })
     .catch((error) => {
         console.error('Error:', error); // Handle any errors

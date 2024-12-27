@@ -125,7 +125,7 @@
                     <div class="form-container">
                         <form id="urlForm" action="baixar.php" method="POST">
                             <div class="form-group">
-                                <label for="urlInput">Digite uma URL válida:</label>
+                                <label for="urlInput">Entre com uma URL válida:</label>
                                 <input 
                                     type="text" 
                                     id="urlInput" 
@@ -136,13 +136,8 @@
                                 <div id="errorMessage" class="error-message"></div>
                             </div>
 
-                            <div class="form-group checkbox-container">
-                                <label for="audioOnly">Baixar somente áudio:</label>
-                                <input type="checkbox" id="audioOnly" name="audioOnly" value="1">
-                            </div>
-
                             <div class="range-selector-container">
-                                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar o áudio</div>
+                                <div class="range-label" id="rangeLabel">Selecione o Intervalo para recortar a mídia</div>
                                 <div 
                                     class="range-wrapper" 
                                     id="rangeWrapper" 
@@ -162,22 +157,8 @@
                             </div>
 
                             <div class="form-group" id="select-video">
-                                <label for="videoFormat">Selecione uma opção de vídeo:</label>
+                                <label for="videoFormat">Selecione uma opção de Formato (áudio/vídeo):</label>
                             </div>
-
-                            <div class="form-group" id="select-ext-audio">
-                                <label for="audioFormat">Selecione o formato do áudio:</label>
-                                <select id="audioFormat" name="audioFormat" required>
-                                    <option value="0">Selecione...</option>
-                                    <option value="mp3">MP3 - Formato mais comum</option>
-                                    <option value="m4a">M4A - Boa qualidade</option>
-                                    <option value="wav">WAV - Sem compressão</option>
-                                    <option value="opus">OPUS - Alta qualidade</option>
-                                    <option value="vorbis">OGG - Formato livre</option>
-                                </select>
-                            </div>
-
-                          
 
                             <div class="spinner-container">
                                 <div class="spinner"></div>
@@ -185,7 +166,7 @@
 
                             <button type="submit" class="btn" id="btnSendUrl">Enviar URL</button>
                         </form>
-                        <button type="button" class="btn" id="btnSendRangeTime">Download</button>
+                        <button type="button" class="btn" id="btnDownload">Download</button>
                         <div class="supported-sites" id="supported-sites-list">
                             <h2>Plataformas Suportados</h2>
                             <div class="sites-category">
