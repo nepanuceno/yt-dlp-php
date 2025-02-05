@@ -1,8 +1,8 @@
 <?php
 
-require_once "../vendor/autoload.php";
+use YtDpl\YtDplAudio;
 
-use YtDpl\YtDplMedia;
+require_once "../vendor/autoload.php";
 
 header("Content-Type: application/json; charset=utf-8");
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
@@ -20,7 +20,9 @@ $tempFileName = md5($fileName);
 
 $objYtDlpMedia->setFileName(fileName: $tempFileName);
 
-$daration = $objYtDlpMedia->getDurationMedia();
+$objYtDlpAudio->generateFile();   
+
+$daration = $objYtDlpAudio->extractInfoFile();
 
 echo json_encode(array(
     "status" => true,
