@@ -124,7 +124,6 @@ class YtDpl
         return null;
     }
 
-
     public function getMideaName(): bool|string
     {
         $pathCutFile = exec('yt-dlp --get-title '. $this->getUrl(), $title);

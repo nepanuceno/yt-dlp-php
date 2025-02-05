@@ -20,9 +20,9 @@ $tempFileName = md5($fileName);
 
 $objYtDlpMedia->setFileName(fileName: $tempFileName);
 
-$objYtDlpAudio->generateFile();   
+$objYtDlpMedia->generateFile();   
 
-$daration = $objYtDlpAudio->extractInfoFile();
+$daration = $objYtDlpMedia->getDurationMedia();
 
 echo json_encode(array(
     "status" => true,

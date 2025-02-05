@@ -68,18 +68,22 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
         passthru('yt-dlp -F '. $this->getUrl());
     }
 
-    public function getDurationMedia(): bool|string
+    public function getDurationMedia(): string
     {
-        $duration = exec('yt-dlp --get-duration '. $this->getUrl(), $duration);
+        $duration = exec('yt-dlp --get-duration '. $this->getUrl(), $duration);        
         $arrDuration = explode(':',$duration);
-
-        return (int)($arrDuration[0]*60) + (int)$arrDuration[1];
+        
+        switch (count(($arrDuration))) {
+            case 1:
+                return (int)$arrDuration[0];
+            case 2:
+                return (int)($arrDuration[0]*60) + ((int)$arrDuration[1]);
+            case 3:
+                return (int)($arrDuration[0]*3600) + (int)($arrDuration[1]*60) + (int)$arrDuration[2];
+            default:
+                return 0;
+        }
     }
-
-    // public function getNameMidea(): bool|string
-    // {        
-    //     return exec('yt-dlp --get-title '. $this->getUrl(), $title);
-    // }
 
     public function getInfoMedia(): void
     {        
