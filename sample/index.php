@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validador de URL</title>
+    <title>Baixar Midea</title>
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/range.css">
@@ -123,7 +123,7 @@
 
                 <!-- Coluna direita com o formulário -->
                 <div class="form-container">
-                    <form id="urlForm" action="baixar.php" method="POST">
+                    <form id="urlForm">
                         <div class="form-group">
                             <label for="urlInput">Digite uma URL válida:</label>
                             <input 

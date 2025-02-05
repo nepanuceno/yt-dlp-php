@@ -12,7 +12,10 @@ RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ffmpeg
 RUN apk add --no-cache python3
-RUN apk add --no-cache yt-dlp
+
+# Install yt-dlp
+RUN wget -O /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp && \
+    chmod +x /usr/local/bin/yt-dlp
 
 # Install PHP extensions
 RUN docker-php-ext-install gd \
@@ -24,6 +27,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install node and npm
 RUN apk add --no-cache nodejs npm
 RUN chown -R 1000:1000 /var/www/*
+
+
 # Set working directory
 WORKDIR /var/www
 
