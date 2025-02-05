@@ -1,6 +1,6 @@
 <?php
 
-use YtDpl\YtDplAudio;
+use YtDpl\YtDplMedia;
 
 require_once "../vendor/autoload.php";
 
