@@ -15,6 +15,7 @@ class YtDpl
     public $nameMidea;
     public $audioFormat;
     public $fileName;
+    public $fileTempName;
     public $idOptionMedia;
     public $fileNameFormated;
 
@@ -30,6 +31,11 @@ class YtDpl
     public function setPath($path): void
     {
         $this->path = $path;
+    }
+
+    public function setFileTempName()
+    {
+        $this->fileTempName = uniqid();
     }
 
     public function setPlaylist($playlist): void
@@ -69,6 +75,11 @@ class YtDpl
             return $this->path;
         }
         return null;
+    }
+
+    public function getFileTempName()
+    {
+        return $this->fileTempName;
     }
 
     /**

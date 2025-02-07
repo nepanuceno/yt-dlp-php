@@ -19,16 +19,16 @@ $objYtDlpMedia->setUrl(url: $url);
 $objYtDlpMedia->setIdOptionMedia($audioFormat);
 $objYtDlpMedia->setAudioFormat(audioFormat: $audioFormat);
 $objYtDlpMedia->setIdOptionMedia($id);
-// $fileName = $objYtDlpMedia->getMideaName($url);
-// $tempFileName = md5($fileName);
 
 $fileName = $objYtDlpMedia->getMideaName();
 
 $objYtDlpMedia->setFileName(fileName: $fileName);
-$objYtDlpMedia->generateFile();
+$objYtDlpMedia->setFileTempName();
 
 $minValueDisplay = $data["minValueDisplay"];
 $maxValueDisplay = $data["maxValueDisplay"];
 
+$objYtDlpMedia->generateFile();
+
 $objYtDlpMedia->cutFile($minValueDisplay, $maxValueDisplay, $fileName);
-$objYtDlpMedia->download($fileName);
+$objYtDlpMedia->download($objYtDlpMedia->getFileNameFormated());

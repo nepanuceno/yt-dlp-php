@@ -18,12 +18,16 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
     {
         return $this->audioFormat;
     }
+   
 
     public function generateFile(): bool|string
     {
         $comando = $this->buildCommandDownloadMedia();
+        
         try {
             exec($comando);
+            var_dump($comando) or die();
+
             return json_encode([
                 'status'=>true,
                 'messagem' => 'Mídea Extraída'
@@ -38,17 +42,17 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
 
     public function cutFile($minValueDisplay, $maxValueDisplay, $fileName): bool|string{
         try {
-            $path = $this->getPath().'/'.$this->getFileName().'.'.$this->getAudioFormat();
+            $path = $this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat();
             $pathCutFile = $this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat();
-                        
+
             $comando = sprintf(
                 'ffmpeg -i %s -ss %s -t %s -c copy %s',
                 escapeshellarg($path),
                 $minValueDisplay,
                 $maxValueDisplay,
                 $pathCutFile
-            );            
-            
+            );
+                                  
             $resp = exec($comando, $resp);                        
             
             return json_encode([
@@ -92,17 +96,19 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
     
     public function buildCommandDownloadMedia(): string {
         return sprintf(
-            'yt-dlp -f %s -P %s %s',
+            'yt-dlp --cache-dir /tmp/yt-dlp-cache -f %s -o %s/%s.%s %s',
             $this->getIdOptionMedia(),
             $this->getPath(),
-            $this->getUrl()
+            $this->getFileTempName(),
+            $this->getAudioFormat(),
+            $this->getUrl(),
         );
     }
 
     public function download($fileName)
     {
         set_time_limit(0);
-        $file = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();
+        $file = $this->getPath().'/'.$fileName.'.'.$this->getAudioFormat();           
         
         if (file_exists($file)) {
             header('Content-Description: File Transfer');
@@ -114,8 +120,9 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
             header('Content-Length: ' . filesize($file));
             readfile($file);
 
-            unlink($this->getPath().'/'.$this->getFileName().'.'.$this->getAudioFormat());
-            unlink($file);
+            // $arquivotemporario = $this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat();
+            // unlink($arquivotemporario);
+            // unlink($file);
             exit;
         }
     }
