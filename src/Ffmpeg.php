@@ -26,7 +26,7 @@ class Ffmpeg implements FfmpegInterface
 
     /**
      * Summary of trimmingFromBeginning
-     * Trimming from the beginning
+     * Clips the media from a specific time point to the end time of the file.
      * @param string $startTime 
      * @return void
      */
@@ -39,14 +39,14 @@ class Ffmpeg implements FfmpegInterface
 
     /**
      * Summary of trimmingFromEnd
-     * Trim from a specific point to the end:
+     * Trims the segment from the beginning of the video to the specified time point.
      * @param string $endTime 
      * @return void
      * 
      */
     public function trimmingFromEnd(string $endTime): void
     {
-        $command = "ffmpeg -ss {$endTime} -i {$this->pathFileInput} {$this->fileNameOutput}";
+        $command = "ffmpeg -ss 00:00:00 -i {$this->pathFileInput} -to {$endTime} -c:v copy -c:a copy {$this->fileNameOutput}";
         $this->run(command: $command);
     }
 
