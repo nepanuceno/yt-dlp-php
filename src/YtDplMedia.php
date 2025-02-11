@@ -26,7 +26,6 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
         
         try {
             exec($comando);
-            var_dump($comando) or die();
 
             return json_encode([
                 'status'=>true,
@@ -51,7 +50,7 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
                 $minValueDisplay,
                 $maxValueDisplay,
                 $pathCutFile
-            );
+            );            
                                   
             $resp = exec($comando, $resp);                        
             
