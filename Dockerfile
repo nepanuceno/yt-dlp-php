@@ -28,9 +28,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN apk add --no-cache nodejs npm
 RUN chown -R 1000:1000 /var/www/*
 
-#Set composer cache
-RUN export COMPOSER_CACHE_DIR=/tmp/composer-cache
-RUN composer require --dev phpunit/phpunit && composer require --dev mockery/mockery && composer require --dev phpunit/phpunit-selenium && composer require --dev phpunit/phpunit-skeleton-generator && composer require --dev phpunit/php-code-coverage
+RUN composer require --dev phpunit/phpunit
+RUN composer install
+RUN yt-dlp https://youtu.be/eI9-q863KTc?si=phh8snfjGtveaXvD --no-cache-dir
 
 # Set working directory
 WORKDIR /var/www
