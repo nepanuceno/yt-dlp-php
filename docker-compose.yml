@@ -7,7 +7,7 @@ services:
     image: yt-dlp-application
     restart: always
     environment:
-      - COMPOSER_CACHE_DIR=/tmp/.cache/composer
+      - COMPOSER_CACHE_DIR=/tmp/composer-cache
     container_name: yt-dlp-application
     tty: true
     ports:

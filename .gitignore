@@ -1,3 +1,4 @@
 vendor/
 file_temp/*
 .env
+tests/test.mp4

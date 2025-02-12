@@ -24,13 +24,21 @@ RUN docker-php-ext-install gd \
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Copie o script entrypoint.sh para o container
+COPY entrypoint.sh /var/www/entrypoint.sh
+
+# Garanta que o script tenha permissões de execução
+RUN chmod +x /var/www/entrypoint.sh
+
+# Defina o entrypoint
+# ENTRYPOINT ["/var/www/entrypoint.sh"]
+
 # Install node and npm
 RUN apk add --no-cache nodejs npm
 RUN chown -R 1000:1000 /var/www/*
 
 RUN composer require --dev phpunit/phpunit
 RUN composer install
-RUN yt-dlp https://youtu.be/eI9-q863KTc?si=phh8snfjGtveaXvD --no-cache-dir
 
 # Set working directory
 WORKDIR /var/www
