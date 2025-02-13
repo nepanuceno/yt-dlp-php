@@ -31,16 +31,14 @@ COPY entrypoint.sh /var/www/entrypoint.sh
 RUN chmod +x /var/www/entrypoint.sh
 
 # Defina o entrypoint
-# ENTRYPOINT ["/var/www/entrypoint.sh"]
 
 # Install node and npm
 RUN apk add --no-cache nodejs npm
 RUN chown -R 1000:1000 /var/www/*
 
-RUN composer require --dev phpunit/phpunit
-RUN composer install
 
 # Set working directory
 WORKDIR /var/www
 
 EXPOSE 9000
+# ENTRYPOINT ["/var/www/entrypoint.sh"]

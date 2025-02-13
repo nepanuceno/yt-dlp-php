@@ -16,12 +16,12 @@ class Ffmpeg implements FfmpegInterface
      * Trim a segment of a video
      * @param string $startTime
      * @param string $endTime
-     * @return void
+     * @return array|null
      */
-    public function mideaSegment(string $startTime, string $endTime): void
+    public function mideaSegment(string $startTime, string $endTime): array|null   
     {
         $command = "ffmpeg -i {$this->pathFileInput} -ss {$startTime} -to {$endTime} -c:v copy -c:a copy {$this->fileNameOutput}";
-        $this->run(command: $command);
+        return $this->run(command: $command);
     }
 
     /**
@@ -30,10 +30,10 @@ class Ffmpeg implements FfmpegInterface
      * @param string $startTime 
      * @return void
      */
-    public function trimmingFromBeginning(string $startTime): void
+    public function trimmingFromBeginning(string $startTime): array|null
     {
         $command = "ffmpeg -ss {$startTime} -i {$this->pathFileInput} -c:v copy -c:a copy {$this->fileNameOutput}";
-        $this->run(command: $command);
+        return $this->run(command: $command);
     }
 
 
@@ -44,19 +44,20 @@ class Ffmpeg implements FfmpegInterface
      * @return void
      * 
      */
-    public function trimmingFromEnd(string $endTime): void
+    public function trimmingFromEnd(string $endTime): array|null
     {
         $command = "ffmpeg -ss 00:00:00 -i {$this->pathFileInput} -to {$endTime} -c:v copy -c:a copy {$this->fileNameOutput}";
-        $this->run(command: $command);
+        return $this->run(command: $command);
     }
 
     /**
      * Summary of run
      * @param string $command
-     * @return void
+     * @return array|null
      */
-    private function run(string $command): void
+    private function run(string $command): array|null
     {
         exec(command: $command, output: $output, result_code: $return);
+        return $output;
     }
 }

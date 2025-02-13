@@ -17,6 +17,9 @@ fi
 
 echo "Executando o comando composer install..."
 
+composer require --dev phpunit/phpunit
+composer require brick/date-time
+
 composer install
 
 vendor/bin/phpunit --colors tests/Ffmpeg.php

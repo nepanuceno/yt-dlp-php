@@ -1,6 +1,6 @@
 <?php
 namespace YtDpl;
-
+use Brick\DateTime\Duration;
 use YtDpl\Interfaces\YtDplAudioInterface;
 
 class YtDplMedia extends YtDpl implements YtDplAudioInterface
@@ -41,18 +41,13 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
 
     public function cutFile($minValueDisplay, $maxValueDisplay, $fileName): bool|string{
         try {
-            $path = $this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat();
-            $pathCutFile = $this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat();
+            $path = escapeshellarg($this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat());
+            $pathCutFile = escapeshellarg($this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat());
 
-            $comando = sprintf(
-                'ffmpeg -i %s -ss %s -t %s -c copy %s',
-                escapeshellarg($path),
-                $minValueDisplay,
-                $maxValueDisplay,
-                $pathCutFile
-            );            
-                                  
-            $resp = exec($comando, $resp);                        
+            $minValueDisplay = Time::toHours($minValueDisplay);
+            $maxValueDisplay = Time::toHours($maxValueDisplay);
+
+            $comando = (new Ffmpeg(pathFileInput: $path, fileNameOutput: $pathCutFile))->mideaSegment( startTime: $minValueDisplay, endTime: $maxValueDisplay);
             
             return json_encode([
                 'status'=> true,
