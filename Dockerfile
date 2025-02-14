@@ -41,4 +41,4 @@ RUN chown -R 1000:1000 /var/www/*
 WORKDIR /var/www
 
 EXPOSE 9000
-# ENTRYPOINT ["/var/www/entrypoint.sh"]
+ENTRYPOINT ["/var/www/entrypoint.sh"]
