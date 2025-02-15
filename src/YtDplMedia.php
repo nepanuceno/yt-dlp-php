@@ -114,9 +114,9 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
             header('Content-Length: ' . filesize($file));
             readfile($file);
 
-            // $arquivotemporario = $this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat();
-            // unlink($arquivotemporario);
-            // unlink($file);
+            $arquivotemporario = $this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat();
+            unlink($arquivotemporario);
+            unlink($file);
             exit;
         }
     }
