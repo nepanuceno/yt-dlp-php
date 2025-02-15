@@ -19,7 +19,7 @@ class Ffmpeg implements FfmpegInterface
      * @return array|null
      */
     public function mideaSegment(string $startTime, string $endTime): array|null   
-    {
+    {        
         $command = "ffmpeg -i {$this->pathFileInput} -ss {$startTime} -to {$endTime} -c:v copy -c:a copy {$this->fileNameOutput}";
         return $this->run(command: $command);
     }

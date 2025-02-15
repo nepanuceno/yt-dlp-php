@@ -2,17 +2,14 @@
 
 namespace YtDpl;
 
-use Brick\DateTime\Duration;
 
 class Time {
 
-    public static function toHours(string $seconds) {
-        $duration = Duration::ofSeconds($seconds);
+    public static function toHours(int $seconds): string {
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        $seconds = $seconds % 60;
 
-        $horas = $duration->toHoursPart();
-        $minutos = $duration->toMinutesPart();
-        $segundos = $duration->toSecondsPart();
-
-        return sprintf("%02d:%02d:%02d", $horas, $minutos, $segundos);
+        return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
     }
 }

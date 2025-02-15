@@ -42,10 +42,10 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
     public function cutFile($minValueDisplay, $maxValueDisplay, $fileName): bool|string{
         try {
             $path = escapeshellarg($this->getPath().'/'.$this->getFileTempName().'.'.$this->getAudioFormat());
-            $pathCutFile = escapeshellarg($this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat());
+            $pathCutFile = escapeshellarg($this->getPath().'/'.$this->getFileNameFormated().'.'.$this->getAudioFormat());            
 
             $minValueDisplay = Time::toHours($minValueDisplay);
-            $maxValueDisplay = Time::toHours($maxValueDisplay);
+            $maxValueDisplay = Time::toHours($maxValueDisplay);            
 
             $comando = (new Ffmpeg(pathFileInput: $path, fileNameOutput: $pathCutFile))->mideaSegment( startTime: $minValueDisplay, endTime: $maxValueDisplay);
             
