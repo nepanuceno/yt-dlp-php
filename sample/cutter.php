@@ -4,7 +4,7 @@ require_once "../vendor/autoload.php";
 
 use YtDpl\YtDplMedia;
 
-header("Content-Type: application/json; charset=utf-8");
+// header("Content-Type: application/json; charset=utf-8");
 
 $data = json_decode(json: file_get_contents(filename: "php://input"), associative: true);
 
