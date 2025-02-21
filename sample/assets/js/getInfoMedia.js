@@ -72,19 +72,17 @@ function getInfoMedia()
     })
     .then(response => response.text())
     .then(data => {
-        const videoData = parseVideoInfo(data);
         let optionsWithValues = [];
-        optionsWithValues.push({
-            'value': "0",
-            'text': 'Selecione um formato de vídeo'
-        });
-        
-        videoData.forEach(info => {
-            optionsWithValues.push({
-                'value': info[0],
-                'extension': info[1],
-                'text': `Formato: ${info[1]} - Resolução: ${ info[2] } - Tamanho: ${info[5]}`
-            });            
+        const arrInfo = JSON.parse(data);
+
+        arrInfo.forEach((info, key) => {
+            if (key > 0) {
+                optionsWithValues.push({
+                    'value': info.id,
+                    'extension': info.ext,
+                    'text': `Formato: ${info.ext} - Resolução: ${ info.resolution } - Tamanho: ${info.filesize}`
+                });            
+            }
         });
 
         const select = createSelect(

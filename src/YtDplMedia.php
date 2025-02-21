@@ -89,10 +89,8 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
     public function getInfoMedia(): void
     {
         exec('yt-dlp -F ' . $this->getUrl(), $output);
-        print_r($output);
         $arrFormats = $this->extractFormats($output);
-        print_r($arrFormats);
-        // echo json_encode($output);
+        echo json_encode($arrFormats);
     }
 
     public function buildCommandDownloadMedia(): string
@@ -134,15 +132,16 @@ class YtDplMedia extends YtDpl implements YtDplAudioInterface
         $formats = [];
 
         foreach ($lines as $line) {
-            // if (preg_match('/^(\w+)\s+(\w+)\s+([\w\s]+)\s+\|\s+([\w\s~]+)\s+\|\s+([\w\s]+)\s+([\w\s]+)\s+([\w\s]+)/', $line, $matches)) {
+          
             //https://www.site24x7.com/pt/tools/regex-parser.html
             //Verificar linhas com | ~ 
-            if (preg_match('/^(\w+)\s+(\w+)\s+([\w\s]+)\s+.\s+\|\s+([\d]+.[\d]+[a-zA-Z]+|\s*)/', $line, $matches)) {
+            if (preg_match('/^(\w+)\s+(\w+)\s+([\w\s]+)\s+(\w+)\s+\|\s+[\s|~|]([\d]+.[\d]+[a-zA-Z]+|\s*)/', $line, $matches)) {
                 $formats[] = [
                     'id' => $matches[1],
                     'ext' => $matches[2],
                     'resolution' => $matches[3],
-                    'filesize' => $matches[4] ?? null,
+                    'fps' => $matches[4] ?? null,
+                    'filesize' => $matches[5] ?? null,
                 ];
             }
         }
