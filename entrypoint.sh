@@ -22,7 +22,7 @@ echo "Adicionando pacotes"
 composer require --dev phpunit/phpunit
 composer require brick/date-time
 
-echo "INstalando Pacotes"
+echo "Instalando Pacotes"
 composer install
 echo "Executando Testes"
 vendor/bin/phpunit --colors tests/Ffmpeg.php
